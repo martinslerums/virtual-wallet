@@ -1,0 +1,29 @@
+.container {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  background-color: rgba(250, 250, 250, 0.5);
+  border-radius: 10px;
+  height: 100%;
+  max-height: 790px;
+}
+
+.balance_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  max-width: 500px;
+  min-height: 180px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.balance {
+  margin: 0;
+  font-size: 44px;
+  font-weight: bold;
+}

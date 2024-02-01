@@ -1,0 +1,20 @@
+.nav {
+  background-color: rgb(34, 148, 148);
+  min-height: 100vh;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav_item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
