@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Form from "../Form/Form";
 import Input from "../Input/Input";
 import Select from "../Select/Select";
@@ -26,7 +26,7 @@ const CreateForm = () => {
     await newBlog.json(); 
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setNewWallet({
       ...newWallet,
       [e.target.name]: e.target.value,
@@ -40,7 +40,7 @@ const CreateForm = () => {
         name="name"
         value={newWallet.name} 
         onChange={handleInputChange}
-        placeholder="Enter wallet name"
+        placeholder="Wallet name"
         required
       />
       <Select 
@@ -48,7 +48,8 @@ const CreateForm = () => {
         value={newWallet.currency} 
         onChange={handleInputChange} 
         required
-        options={{"": "","EUR": "Euro", "USD": "Dollars"}} 
+        options={{"EUR": "EUR", "USD": "USD"}} 
+        placeholder="Choose a value"
       />
       <Button type="submit" label="Create" />
     </Form>

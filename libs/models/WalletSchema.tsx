@@ -2,12 +2,19 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const walletSchema = new Schema({
-  name: String,
+  name: {
+    type: String, 
+    required: true,
+    unique: true
+  },
   balance: {
     type: Number, 
     default: 0
   },
-  currency: String,
+  currency: {
+    type: String, 
+    required: true
+  },
 },
 {
   timestamps: true,

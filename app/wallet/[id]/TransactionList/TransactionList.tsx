@@ -1,9 +1,9 @@
 'use client'
 
-import { compareDesc, format } from "date-fns";
-import styles from "./TransactionList.module.css"
+import { format } from "date-fns";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import styles from "./TransactionList.module.css"
 
 
 type TransactionListProps = {

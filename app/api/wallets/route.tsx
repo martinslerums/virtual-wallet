@@ -19,7 +19,6 @@ export const POST = async (request: NextRequest) => {
   }
 };
 
-
 export const GET = async () => {
   try {
 
@@ -33,4 +32,5 @@ export const GET = async () => {
     return new NextResponse("GET Route-handler for Wallets failed: " + error);
   }
 }; 
+
 

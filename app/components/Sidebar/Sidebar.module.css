@@ -1,20 +1,19 @@
-.nav {
-  background-color: rgb(34, 148, 148);
-  min-height: 100vh;
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.sidebar_wrapper {
+
 }
 
-.nav_item {
+.header {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0;
+  justify-content: start;
+
+  min-height: 40px;
+  height: 100%;
+  background-color: #011627;
+  padding: 10px 15px;
 }
 
-.link {
-  text-decoration: none;
-  color: white;
+
+.header svg {
+  font-size: 35px;
+  color: #eaecef;
 }

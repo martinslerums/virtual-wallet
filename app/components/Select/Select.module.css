@@ -1,20 +1,13 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  
-  &.large{ 
-    max-width: 400px;
-    width: 100%;
-  }
 }
 
 .wrapper label {
   font-size: 20px;
 }
 
-.input {
-  font-size: 0.75rem;
-  line-height: 1.2rem;
+.select {
   padding: 6px;
   border-radius: 6px;
   background: #fbfbfb;
@@ -22,7 +15,12 @@
   box-shadow: 0 0 0 1px #dddddd, 0 2px 4px 0 rgb(0 0 0 / 7%), 0 1px 1.5px 0 rgb(0 0 0 / 5%);
 }
 
-.input:focus{
+.options {
+  font-size: 0.75rem;
+  line-height: 1.2rem;
+}
+
+.select:focus{
     border: 2px solid #000;
     border-radius: 4px;
 }

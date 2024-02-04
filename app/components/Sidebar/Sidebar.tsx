@@ -1,43 +1,26 @@
-import Link from "next/link";
+'use client'
+
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useState } from "react";
+import Navbar from "../Navbar/Navbar";
 import styles from "./Sidebar.module.css"
-import Modal from "../Modal/Modal";
 
-
-const getWallets = async () => {
-  const response = await fetch("http://localhost:3000/api/wallets", {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch blogs from route-handler");
-  }
-
-  return response.json();
+type SidebarProps = {
+  wallets: Wallet[]
 }
 
-const Sidebar = async () => {
+const Sidebar = ({wallets}:SidebarProps) => {
 
+  const [showNav, setShowNav] = useState(false)
 
-
-  const wallets = await getWallets()
-
-  return (  
-    <nav className={styles.nav}>
-      <Link href='/'>Overview</Link>
-      
-      My wallets
-      {wallets && wallets.map((wallet: Wallet) => (
-        <ul className={styles.nav_item} key={wallet._id}>
-          <Link className={styles.link} href={`/wallet/${wallet._id}`}>
-            <li>{wallet.name}</li>
-          </Link>
-        </ul>
-      ))}
-
-      <Link href='#'>Transactions</Link>      
-      <Link href="?create=true">Create</Link>
-    </nav>
-  );
+  return ( 
+    <div className={styles.sidebar_wrapper}>
+      <div className={styles.header}>
+        <GiHamburgerMenu onClick={() => setShowNav(!showNav)} />
+      </div>
+      <Navbar wallets={wallets} show={showNav}/>
+    </div>
+   );
 }
  
 export default Sidebar;

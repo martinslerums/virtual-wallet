@@ -1,14 +1,14 @@
 import styles from "./Input.module.css"
 
 type InputProps = {
-    type: HTMLInputElement['type']
-    placeholder?: string
-    name?: string
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-    value?: string
-    required: boolean
-    label?: string
-    size?: 'large'
+    type: HTMLInputElement['type'];
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    required: boolean;
+    name?: string;
+    size?: 'large';
+    label?: string;
+    placeholder?: string;
 }
 
 const Input = ({value,label, name, onChange, placeholder, type='string', required, size}: InputProps ) => {

@@ -1,4 +1,4 @@
-import Overview from "./overview/Overview";
+import Overview from "./components/Overview/Overview";
 
 const getWallets = async () => {
   const response = await fetch("http://localhost:3000/api/wallets", {
@@ -10,7 +10,7 @@ const getWallets = async () => {
   }
 
   return response.json();
-}
+};
 
 const getTransactions = async () => {
   const response = await fetch("http://localhost:3000/api/transactions", {
@@ -22,18 +22,17 @@ const getTransactions = async () => {
   }
 
   return response.json();
-}
+};
 
-const Home  = async () => {
+const Home = async () => {
+  const wallets = await getWallets();
+  const transactions = await getTransactions();
 
-  const wallets = await getWallets()
-  const transactions = await getTransactions()
-  
   return (
     <>
       <Overview wallets={wallets} transactions={transactions} />
     </>
   );
-}
+};
 
 export default Home;

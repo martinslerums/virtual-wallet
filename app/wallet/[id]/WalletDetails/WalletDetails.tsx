@@ -1,45 +1,83 @@
+"use client";
+
 import TransactionList from "@/app/wallet/[id]/TransactionList/TransactionList";
-import styles from "./WalletDetails.module.css";
 import TransactionForm from "@/app/wallet/[id]/TransactionForm/TransactionForm";
+import Input from "@/app/components/Input/Input";
+import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import styles from "./WalletDetails.module.css";
 
-const getWallet = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch wallet with ID: ${id}. Status: ${response.status}`
-    );
-  }
-
-  return response.json();
+type WalletDetailsProps = {
+  transactions: Transaction[];
+  wallet: Wallet;
 };
 
-const getTransactions = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/wallets/${id}/transactions`, {
-      cache: "no-store",
-    });
+const WalletDetails = ({transactions, wallet: { name, balance, _id: id }}: WalletDetailsProps) => {
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch transactions for wallet with ID: ${id}. Status: ${response.status}`);
+  const router = useRouter()
+  const [editMode, setEditMode] = useState(false);
+  const [editWalletName, setEditWalletName] = useState(name)
+
+  const handleWalletEdit = async (id: string) => {
+    const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ name: editWalletName })
+    })
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete data: ${response.status}`);
+    }
+
+    router.refresh()
+    
+    return response.json();
   }
 
-  return response.json();
-};
+  const handleWalletDelete = async (id: string) => {
+    const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
+      method: 'DELETE',
+    })
 
-const WalletDetails = async ({ params: { id } }: Params) => {
+    if (!response.ok) {
+      throw new Error(`Failed to delete data: ${response.status}`);
+    }
+    
+    return response.json();
+  }
 
-  const {name, balance} = await getWallet(id);
-  const transactions = await getTransactions(id);
-
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEditWalletName(e.target.value);
+  };
+  
   return (
     <main className={styles.container}>
-      <h1>{name}</h1>
+      {editMode ? (
+        <div>
+          <Input 
+            type="text" 
+            value={editWalletName} 
+            onChange={handleInputChange} 
+            required
+          />
+          <button onClick={() => {
+            handleWalletEdit(id);
+            setEditMode(false)}}>Save</button>
+        </div>
+      ) : (
+        <div>
+          <h1>{name}</h1>
+          <button onClick={() => setEditMode(true)}>Edit</button>
+        </div>
+      )}
       <div className={styles.balance_wrapper}>
-        <h2 className={styles.balance}> Wallet balance: {balance === 0 ? 0 : balance.toFixed(2)}</h2>
+        <h2 className={styles.balance}>
+          Wallet balance: {balance === 0 ? 0 : balance.toFixed(2)}
+        </h2>
       </div>
-      <TransactionList transactions={transactions}/>
+      <TransactionList transactions={transactions} />
       <TransactionForm walletId={id} />
     </main>
   );

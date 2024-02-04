@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  padding: 120px;
+}
+
+.childrenWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
