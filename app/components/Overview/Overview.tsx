@@ -9,7 +9,7 @@ type OverviewProps = {
 
 const Overview = ({ wallets, transactions }: OverviewProps) => {
   return (
-    <main className={styles.container}>
+    <section className={styles.container}>
       {wallets.map((wallet: Wallet) => (
         <WalletCard
           key={wallet._id}
@@ -17,7 +17,7 @@ const Overview = ({ wallets, transactions }: OverviewProps) => {
           transactions={transactions}
         />
       ))}
-    </main>
+    </section>
   );
 };
 

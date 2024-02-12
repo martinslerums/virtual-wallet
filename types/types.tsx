@@ -13,6 +13,7 @@ type Wallet = {
 
 type Transaction = {
 	_id: string,
+	fraudulent: boolean;
 	amount: number,
 	description: string,
 	type: string,
@@ -22,14 +23,3 @@ type Transaction = {
 		name: string,
 	}
 }
-
-// export type Comment = {
-//   _id: string,
-//   author: string,
-//   comment: string,
-//   createdAt: string,
-//   blog: {
-//     _id: string,
-//     title: string,
-//   }
-// }

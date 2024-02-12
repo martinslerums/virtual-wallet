@@ -1,4 +1,3 @@
-import TransactionList from "./TransactionList/TransactionList";
 import WalletDetails from "./WalletDetails/WalletDetails";
 
 const getWallet = async (id: string) => {

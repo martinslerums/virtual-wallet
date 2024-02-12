@@ -17,9 +17,9 @@ const Navigation = async () => {
   const wallets = await getWallets()
 
   return ( 
-    <>
+    <div className="absolute">
       <Sidebar wallets={wallets} />
-    </>
+    </div>
    );
 }
  

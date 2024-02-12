@@ -16,13 +16,12 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 
   return (
     <html lang="en">
-      <body className={inter.className} >
+      <body className={`${inter.className} flex`} >
         <Navigation />
-        <section className="root_section">{children}</section>
+        <main className="py-8 px-5 w-4/5 my-0 mx-auto felx-1 h-screen">{children}</main>
         <Suspense fallback={<>Loading...</>}>
           <Modal />
         </Suspense>
-
       </body>
     </html>
   );

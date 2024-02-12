@@ -8,9 +8,9 @@
   padding: 15px;
 }
 
-.name {}
+/* .name {}
 
-.balance {}
+.balance {} */
 
 /* Recent Transactions */
 
@@ -34,6 +34,6 @@
   gap: 15px;
 }
 
-.amount {}
+/* .amount {}
 
-.description {}
+.description {} */
