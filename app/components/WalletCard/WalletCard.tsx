@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import styles from "./WalletCard.module.css";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import React, { ReactNode } from "react";
 import RecentTransactions from "../RecentTransactions/RecentTransactions";
 
@@ -16,15 +9,15 @@ type WalletCardProps = {
   classname?: string;
 };
 
-const WalletCard = ({ wallet: { name, balance, _id: wallet_id }, transactions }: WalletCardProps) => {
+const WalletCard = ({ wallet: {currency, name, balance, _id: wallet_id }, transactions }: WalletCardProps) => {
   return (
-    <Card key={wallet_id}>
+    <Card key={wallet_id} className="p-2">
       <CardHeader>
-        <CardTitle>{name}</CardTitle>
+        <CardTitle className="text-3xl font-bold">{name}</CardTitle>
         <CardDescription>Balance: {balance}</CardDescription>
       </CardHeader>
       <CardContent>
-        <RecentTransactions title="Recent transactions: " wallet_id={wallet_id} transactions={transactions} />
+        <RecentTransactions title="Recent transactions: " wallet_id={wallet_id} wallet_currency={currency} transactions={transactions} />
       </CardContent>
     </Card>
   );

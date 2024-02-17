@@ -25,6 +25,7 @@ const getTransactions = async () => {
 };
 
 const Home = async () => {
+  
   const wallets = await getWallets();
   const transactions = await getTransactions();
 

@@ -13,7 +13,7 @@ export const GET = async ( request: NextRequest, { params: { id } }: Params) => 
     return new NextResponse(JSON.stringify(transaction));
   } catch (error) {
     
-    return new NextResponse("GET request for blog comments failed " + error);
+    return new NextResponse(`GET request for transactions for wallet with ID: ${id} failed` + error);
   }
 };
 
@@ -49,6 +49,7 @@ export const DELETE = async (request: NextRequest, { params: { id } }: Params) =
     await connectMongoDB();
 
     const transaction = await Transaction.findByIdAndDelete(id)
+
     const wallet = await Wallet.findById(transaction.wallet);
 
     if (transaction.amount > 0) {
@@ -65,3 +66,5 @@ export const DELETE = async (request: NextRequest, { params: { id } }: Params) =
     return new NextResponse("Error in deleting transaction from Database: " + error);
   } 
 };
+
+

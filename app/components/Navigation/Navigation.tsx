@@ -1,3 +1,5 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 import Sidebar from "../Sidebar/Sidebar";
 
 const getWallets = async () => {
@@ -15,10 +17,11 @@ const getWallets = async () => {
 const Navigation = async () => {
 
   const wallets = await getWallets()
+  const session = await getServerSession(authOptions);
 
   return ( 
     <div className="absolute">
-      <Sidebar wallets={wallets} />
+      <Sidebar wallets={wallets} session={session} />
     </div>
    );
 }

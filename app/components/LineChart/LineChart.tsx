@@ -12,10 +12,10 @@ ChartJS.register(
 )
 
 type LineChartProps = { 
-  transactions: Transaction[]
+  transactions: Transaction []
 }
 
-const LineChart = ({transactions}: LineChartProps) => {
+const LineChart = ({ transactions }: LineChartProps) => {
   
   const sortedTransactionsForChart = [...transactions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
   const dates = sortedTransactionsForChart.map((transaction: Transaction) => format(transaction.createdAt, "MM-dd"));
@@ -45,35 +45,40 @@ const LineChart = ({transactions}: LineChartProps) => {
       padding: 30
     },
     scales: {
-        y: {
-          ticks: {
-              color: 'black',
-              font: {
-                weight: 'bold'
-              },
-              callback: (tickValue: string | number) => {
-                const value = typeof tickValue === 'string' ? parseFloat(tickValue) : tickValue;
-                return value >= 1000 ? (value / 1000).toFixed(1) + 'K' : value;
-              },
-          },
-          grid: {
-            display: false
-          }
-        },
-        x: {
-          ticks: {
-            display: false,
+      y: {
+        ticks: {
             color: 'black',
             font: {
               weight: 'bold'
             },
-          },
+            callback: (tickValue: string | number) => {
+              const value = typeof tickValue === 'string' ? parseFloat(tickValue) : tickValue;
+              return value >= 1000 ? (value / 1000) + 'K' : value;
+            },
+        },
+        grid: {
+          display: false
         }
+      },
+      x: {
+        ticks: {
+          display: false,
+          color: 'black',
+          font: {
+            weight: 'bold'
+          },
+        },
+        grid: {
+          display: false
+        }
+      }
     }
   };
 
   return ( 
-      <Line data={data} options={options} />
+    <div className='relative'>
+      <Line data={data} options={options} width="w-full" className="w-full h-auto" />
+    </div>
   );
 }
  
