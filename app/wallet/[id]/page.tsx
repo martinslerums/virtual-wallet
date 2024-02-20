@@ -1,4 +1,4 @@
-import WalletDetails from "./WalletDetails/WalletDetails";
+import WalletActions from "@/app/components/WalletActions/WalletActions";
 
 const getWallet = async (id: string) => {
   const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
@@ -14,26 +14,37 @@ const getWallet = async (id: string) => {
   return response.json();
 };
 
-const getTransactions = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/wallets/${id}/transactions`, {
-      cache: "no-store",
-    });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch transactions for wallet with ID: ${id}. Status: ${response.status}`);
-  }
-
-  return response.json();
-};
-
 const WalletDetailsPage = async ({ params: { id } }: Params) => {
-
   const wallet = await getWallet(id);
-  const transactions = await getTransactions(id);
+
+  const { name, balance, currency } = wallet;
 
   return (
     <>
-      <WalletDetails transactions={transactions} wallet={wallet} />
+      <div className="flex py-2 justify-between">
+        <h1 className="text-6xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+          {name}
+        </h1>
+        <WalletActions wallet={wallet} />
+      </div>
+      <div className="flex flex-col py-5 w-full gap-2.5 rounded-md shadow-md">
+        <p className="flex justify-start text-xl sm:text-sm md:text-base lg:text-lg xl:text-xl">
+          Wallet balance
+        </p>
+        <div className="flex justify-center align-center">
+          <h1 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold">
+            {currency === "EUR"
+              ? new Intl.NumberFormat("en-EU", {
+                  style: "currency",
+                  currency: "EUR",
+                }).format(balance)
+              : new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(balance)}
+          </h1>
+        </div>
+      </div>
     </>
   );
 };

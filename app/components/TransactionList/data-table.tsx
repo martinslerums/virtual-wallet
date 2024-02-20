@@ -63,7 +63,7 @@ const TransactionList = <TData, TValue>({ columns, data }: DataTableProps<TData,
   });
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col justify-between w-full">
       <div className="rounded-md border">
         <Table className="max-h-[300px] h-full">
           <TableHeader>

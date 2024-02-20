@@ -1,6 +1,17 @@
-import { format } from 'date-fns';
+"use client";
+
+import { format } from "date-fns";
 import { Line } from "react-chartjs-2";
-import {Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Tooltip, ChartOptions, Filler  } from "chart.js"
+import {
+  Chart as ChartJS,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Tooltip,
+  ChartOptions,
+  Filler,
+} from "chart.js";
 
 ChartJS.register(
   LineElement,
@@ -9,19 +20,22 @@ ChartJS.register(
   PointElement,
   Tooltip,
   Filler
-)
+);
 
-type LineChartProps = { 
-  transactions: Transaction []
-}
+type LineChartProps = {
+  transactions: Transaction[];
+};
 
 const LineChart = ({ transactions }: LineChartProps) => {
-  
-  const sortedTransactionsForChart = [...transactions].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-  const dates = sortedTransactionsForChart.map((transaction: Transaction) => format(transaction.createdAt, "MM-dd"));
-  
+  const sortedTransactionsForChart = [...transactions].sort(
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+  );
+  const dates = sortedTransactionsForChart.map((transaction: Transaction) =>
+    format(transaction.createdAt, "MM-dd")
+  );
+
   let cumulativeBalance: number = 0;
-  
+
   const amounts = sortedTransactionsForChart.map((transaction: Transaction) => {
     cumulativeBalance += transaction.amount;
     return cumulativeBalance;
@@ -29,57 +43,62 @@ const LineChart = ({ transactions }: LineChartProps) => {
 
   const data = {
     labels: dates,
-    datasets: [{
-      data:  amounts,
-      backgroundColor: 'rgba(165, 240, 167, 0.5)',
-      borderColor: 'rgba(165, 240, 167, 1)',
-      pointBorderColor: 'rgba(165, 240, 167, 1)',
-      tension: 0.1,
-      borderWidth: 3,
-      fill: true,
-    }]
+    datasets: [
+      {
+        data: amounts,
+        backgroundColor: "rgba(165, 240, 167, 0.5)",
+        borderColor: "rgba(165, 240, 167, 1)",
+        pointBorderColor: "rgba(165, 240, 167, 1)",
+        tension: 0.1,
+        borderWidth: 3,
+        fill: true,
+      },
+    ],
   };
 
-  const options: ChartOptions<'line'> = {
+  const options: ChartOptions<"line"> = {
     layout: {
-      padding: 30
+      padding: 30,
     },
     scales: {
       y: {
         ticks: {
-            color: 'black',
-            font: {
-              weight: 'bold'
-            },
-            callback: (tickValue: string | number) => {
-              const value = typeof tickValue === 'string' ? parseFloat(tickValue) : tickValue;
-              return value >= 1000 ? (value / 1000) + 'K' : value;
-            },
+          color: "black",
+          font: {
+            weight: "bold",
+          },
+          callback: (tickValue: string | number) => {
+            const value =
+              typeof tickValue === "string" ? parseFloat(tickValue) : tickValue;
+            return value >= 1000 ? value / 1000 + "K" : value;
+          },
         },
         grid: {
-          display: false
-        }
+          display: false,
+        },
       },
       x: {
         ticks: {
           display: false,
-          color: 'black',
+          color: "black",
           font: {
-            weight: 'bold'
+            weight: "bold",
           },
         },
         grid: {
-          display: false
-        }
-      }
-    }
+          display: false,
+        },
+      },
+    },
   };
 
-  return ( 
-    <div className='relative'>
-      <Line data={data} options={options} width="w-full" className="w-full h-auto" />
-    </div>
+  return (
+      <Line
+        data={data}
+        options={options}
+        className="rounded-md border h-full"
+      />
   );
-}
- 
+};
+
 export default LineChart;

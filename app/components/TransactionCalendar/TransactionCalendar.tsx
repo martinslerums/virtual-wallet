@@ -23,15 +23,13 @@ const TransactionCalendar = ({transactions}: TransactionCalendarProps) => {
   };
 
   return (
-    <div className="flex">
       <Calendar
         fixedWeeks
         mode="range"
-        className="rounded-md border text-xs"
+        className="flex rounded-md border text-xs"
         modifiers={dateModifiers}
         modifiersStyles={modifiersStyles}
       />
-    </div>
   );
 }
  
