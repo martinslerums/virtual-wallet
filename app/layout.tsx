@@ -4,9 +4,9 @@ import "./globals.css";
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import Provider from "./components/Provider/Provider";
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./components/Sidebar/Sidebar";
 import { FraudulentTransactionsProvider } from "@/hooks/useFraudulentContext/FraudulentTransactionsContext";
-import { getServerSession } from "next-auth";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +20,13 @@ type RootLayoutProps = {
 };
 
 const RootLayout = ({ children }: RootLayoutProps) => {
-
   return (
     <html lang="en">
       <body className={`${inter.className} flex`}>
         <Provider>
           <FraudulentTransactionsProvider>
             <Navigation />
-            <main className="py-8 px-5 w-4/5 my-0 mx-auto h-screen">
+            <main className="py-20 px-28 w-4/5 my-0 mx-auto h-screen">
               {children}
             </main>
           </FraudulentTransactionsProvider>

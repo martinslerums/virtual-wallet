@@ -1,27 +1,21 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
-    username: {
-        type: String,
-        require: true,
-        unique: true,
+const userSchema = new Schema(
+    {
+        username: {
+            type: String,
+            require: true,
+            unique: true,
+        },
+        password: {
+            type: String,
+            require: true,
+        },
     },
-    password: {
-        type: String,
-        require: true,
-    },
-    wallets: [
-        {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Wallet",
-        }
-    ]
-
-},
-{
-    timestamps: true
-}
+    {
+        timestamps: true
+    }
 );
 
 const UserModel = mongoose.models.User || mongoose.model("User", userSchema);

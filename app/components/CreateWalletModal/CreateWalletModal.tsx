@@ -33,14 +33,20 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { MdOutlineAddBox } from "react-icons/md";
+import { useEffect, EffectCallback } from "react";
 
 const formSchema = z.object({
-  name: z.string().min(3, {
-    message: "Description must be at least 3 characters long.",
-  }),
-  currency: z.string().min(3, {
-    message: "Select a currency for your wallet.",
-  }),
+  name: z.string()
+    .min(3, {
+      message: "Description must be at least 3 characters long.",
+    })
+    .regex(/^[A-Za-z]+$/, {
+      message: "Wallet name can consist only of letters.",
+    }),
+  currency: z.string()
+    .min(3, {
+      message: "Select a currency for your wallet.",
+    }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -50,6 +56,7 @@ type CreateWalletModalProps = {
 };
 
 const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
+  
   const router = useRouter();
 
   const form = useForm<FormValues>({
@@ -58,6 +65,13 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
       name: "",
     },
   });
+
+  useEffect((): ReturnType<EffectCallback> => {
+    const unsubscribe = form.watch((values) => {
+      form.trigger(); 
+    });
+    return unsubscribe.unsubscribe;
+  }, [form]);
 
   const onSubmit = async (values: FormValues) => {
     try {
@@ -83,10 +97,10 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <li className="sidebar-li cursor-pointer">
-          <MdOutlineAddBox className="text-3xl shaking" />
+        <li className="sidebar-li cursor-pointer items-center">
+          <MdOutlineAddBox className="text-5xl shaking" />
           <span
-            className={`${!showNav && "scale-0"} origin-right duration-500 `}
+            className={`${!showNav && "scale-0"} origin-right duration-500 text-lg`}
           >
             Create
           </span>
@@ -146,13 +160,19 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
                 );
               }}
             />
-            <DialogFooter className="sm:justify-start">
-              <DialogClose asChild>
-                <Button type="submit" variant="secondary">
-                  Create
-                </Button>
-              </DialogClose>
-            </DialogFooter>
+           <DialogFooter className="sm:justify-start">
+                  {form.formState.errors.name ? (
+                    <Button disabled variant="secondary">
+                      Edit
+                    </Button>
+                  ) : (
+                    <DialogClose asChild>
+                      <Button type="submit" variant="secondary">
+                        Edit
+                      </Button>
+                    </DialogClose>
+                  )}
+                </DialogFooter>
           </form>
         </Form>
       </DialogContent>

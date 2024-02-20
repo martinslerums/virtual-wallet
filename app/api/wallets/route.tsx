@@ -3,7 +3,7 @@ import connectMongoDB from "@/libs/mongo/script";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
-import UserModel from "@/libs/models/UserSchema";
+
 
 
 export const POST = async (request: NextRequest) => {
@@ -13,29 +13,37 @@ export const POST = async (request: NextRequest) => {
     const session = await getServerSession(authOptions);
     const { name, currency } = await request.json();
 
-    const wallet = await Wallet.create({ name, currency, balance: 0 });
-   
-
-  
-    return NextResponse.json({ message: `Wallet created successfully : ${wallet}` }, { status: 201 });
+    if(session){
+      const wallet = await Wallet.create({ name, currency, balance: 0, user: session.user._id });
+      
+      return NextResponse.json({ message: `Wallet created successfully : ${wallet}` }, { status: 201 });
+    }
 
   } catch(error) {
-      return new NextResponse("POST Route-handler for Wallets failed: " + error);
+
+      return new NextResponse("Wallets POST Route-handler failed: " + error);
   }
 };
 
 export const GET = async () => {
   try {
-
     await connectMongoDB();
 
-    const wallets = await Wallet.find()
+    const session = await getServerSession(authOptions);
 
-    return new NextResponse(JSON.stringify(wallets));
+    if(session){
+      const id = session.user._id;
+      const wallets = await Wallet.find({user: id});
+      
+      return new NextResponse(JSON.stringify(wallets));
+    }
+
+    return new NextResponse("User session not found", { status: 401 });
+    
 
   } catch (error) {
-    return new NextResponse("GET Route-handler for Wallets failed: " + error);
+
+    return new NextResponse("Wallet GET Route-handler failed: " + error);
   }
 }; 
-
 
