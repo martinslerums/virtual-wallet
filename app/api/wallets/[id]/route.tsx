@@ -1,3 +1,4 @@
+import Transaction from "@/libs/models/TransactionSchema";
 import Wallet from "@/libs/models/WalletSchema";
 import connectMongoDB from "@/libs/mongo/script";
 import { NextRequest, NextResponse } from "next/server";
@@ -40,6 +41,7 @@ export const DELETE = async (request: NextRequest, { params: { id } }: Params) =
 
     await connectMongoDB();
 
+    await Transaction.deleteMany({ wallet: id });
     const wallet = await Wallet.findByIdAndDelete(id)
 
     return new NextResponse(JSON.stringify(wallet));

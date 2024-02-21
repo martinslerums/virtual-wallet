@@ -7,10 +7,14 @@ const LoginPage = async () => {
   const session = await getServerSession();
 
   if (session) {
-    redirect("/");
+    redirect("/overview");
   }
 
-  return <LoginForm />;
+  return (
+    <div className="flex justify-center items-center h-full ">
+      <LoginForm />
+    </div>
+   )
 };
 
 export default LoginPage;

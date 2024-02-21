@@ -19,6 +19,10 @@ const config = {
     },
     extend: {
       colors: {
+        seagreen: "#2E8B57",
+        slateblue: "#6a5acd",
+        salmon: "#FA8072",
+        darkgray: "#333333",
         darkpurple: "#081A51",
         lightwithe: "rgba(255, 255, 255, 0.17)",
         border: "hsl(var(--border))",
@@ -74,6 +78,10 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage: {
+        'hero-pattern': "url('/images/background.jpg')",
+        'logged': "url('/images/backgroundlogged.png')",
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

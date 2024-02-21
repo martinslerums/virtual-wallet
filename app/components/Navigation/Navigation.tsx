@@ -47,7 +47,7 @@ const Navigation = ({ wallets, session }: SidebarProps) => {
         }
       </div>
       {session && (
-        <div className="border flex flex-col h-[90%] justify-between">
+        <div className=" flex flex-col h-[90%] justify-between">
           <ul className="pt-16">
             <li className="sidebar-li ">
               <Link href="/overview" className="flex gap-2 items-center">

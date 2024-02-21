@@ -133,7 +133,7 @@ const TransactionList = <TData, TValue>({ columns, data }: DataTableProps<TData,
             <SelectItem value="Deposit">Deposit</SelectItem>
           </SelectContent>
         </Select>
-        <div className="flex gap-2">
+        <div className="flex gap-5">
           <Button
             variant="outline"
             size="icon"

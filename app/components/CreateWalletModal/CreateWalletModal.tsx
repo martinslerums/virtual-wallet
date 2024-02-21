@@ -36,17 +36,17 @@ import { MdOutlineAddBox } from "react-icons/md";
 import { useEffect, EffectCallback } from "react";
 
 const formSchema = z.object({
-  name: z.string()
+  name: z
+    .string()
     .min(3, {
       message: "Description must be at least 3 characters long.",
     })
     .regex(/^[A-Za-z]+$/, {
       message: "Wallet name can consist only of letters.",
     }),
-  currency: z.string()
-    .min(3, {
-      message: "Select a currency for your wallet.",
-    }),
+  currency: z.string().min(3, {
+    message: "Select a currency for your wallet.",
+  }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -56,7 +56,6 @@ type CreateWalletModalProps = {
 };
 
 const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
-  
   const router = useRouter();
 
   const form = useForm<FormValues>({
@@ -68,7 +67,7 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
 
   useEffect((): ReturnType<EffectCallback> => {
     const unsubscribe = form.watch((values) => {
-      form.trigger(); 
+      form.trigger();
     });
     return unsubscribe.unsubscribe;
   }, [form]);
@@ -100,7 +99,9 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
         <li className="sidebar-li cursor-pointer items-center">
           <MdOutlineAddBox className="text-5xl shaking" />
           <span
-            className={`${!showNav && "scale-0"} origin-right duration-500 text-lg`}
+            className={`${
+              !showNav && "scale-0"
+            } origin-right duration-500 text-lg`}
           >
             Create
           </span>
@@ -108,16 +109,10 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Create a wallet</DialogTitle>
-          <DialogDescription>
-            Anyone who has this link will be able to view this.
-          </DialogDescription>
+          <DialogTitle className="text-2xl">Create a wallet</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="max-w-md w-full flex flex-col gap-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name="name"
@@ -130,10 +125,12 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
                         {...field}
                         placeholder="Wallet name"
                         type="text"
-                        className="flex"
+                        className="w-full h-full rounded-md p-2 focus:outline-none text-sm"
                       />
                     </FormControl>
-                    <FormMessage />
+                    <div className="w-full h-6">
+                      <FormMessage />
+                    </div>
                   </FormItem>
                 );
               }}
@@ -146,7 +143,7 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
                   <FormItem>
                     <Select onValueChange={field.onChange} required>
                       <FormControl>
-                        <SelectTrigger className="w-[180px]">
+                        <SelectTrigger className="w-full h-full rounded-md p-2 focus:outline-none text-sm">
                           <SelectValue placeholder="Wallet currency" />
                         </SelectTrigger>
                       </FormControl>
@@ -155,24 +152,35 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
                         <SelectItem value="USD">USD</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage />
+                    <div className="w-full h-6">
+                      <FormMessage />
+                    </div>
                   </FormItem>
                 );
               }}
             />
-           <DialogFooter className="sm:justify-start">
-                  {form.formState.errors.name ? (
-                    <Button disabled variant="secondary">
-                      Edit
-                    </Button>
-                  ) : (
-                    <DialogClose asChild>
-                      <Button type="submit" variant="secondary">
-                        Edit
-                      </Button>
-                    </DialogClose>
-                  )}
-                </DialogFooter>
+
+            <DialogFooter className="mt-10">
+              {form.formState.errors.name ? (
+                <Button
+                  disabled
+                  variant="secondary"
+                  className="w-full h-full border-none outline-none rounded-md p-2 text-sm text-darkgray font-bold"
+                >
+                  Edit
+                </Button>
+              ) : (
+                <DialogClose asChild>
+                  <Button
+                    type="submit"
+                    variant="secondary"
+                    className="w-full h-full border-none outline-none rounded-md p-2 text-sm text-darkgray font-bold"
+                  >
+                    Create
+                  </Button>
+                </DialogClose>
+              )}
+            </DialogFooter>
           </form>
         </Form>
       </DialogContent>

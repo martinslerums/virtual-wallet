@@ -22,10 +22,10 @@ const WalletTransactions = async ({ params: { id } }: Params) =>  {
 
   return (
     <>
-      <div className="flex grow h-full">
+      <div className="flex grow h-full max-w-[80%] w-full">
         <TransactionList columns={columns} data={data} />
       </div>
-      <div className="h-full">
+      <div className="h-full max-w-[20%] w-full">
         <NewTransactionForm wallet_id={id} />
       </div>
     </>

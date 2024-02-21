@@ -22,13 +22,13 @@ const WalletDetailsPage = async ({ params: { id } }: Params) => {
   return (
     <>
       <div className="flex py-2 justify-between">
-        <h1 className="text-6xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+        <h1 className="text-6xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
           {name}
         </h1>
         <WalletActions wallet={wallet} />
       </div>
       <div className="flex flex-col py-5 w-full gap-2.5 rounded-md shadow-md">
-        <p className="flex justify-start text-xl sm:text-sm md:text-base lg:text-lg xl:text-xl">
+        <p className="flex justify-start text-xl sm:text-sm md:text-base lg:text-lg xl:text-xl p-2.5">
           Wallet balance
         </p>
         <div className="flex justify-center align-center">

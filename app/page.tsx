@@ -1,11 +1,20 @@
-
-
-
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 const Home = async () => {
 
-  return <h1>This is the main page</h1>;
+  const session = await getServerSession();
 
+  if (session) {
+    redirect("/overview");
+  }
+
+  if (!session) {
+    redirect("/login");
+  }
+
+  return
 };
 
 export default Home;
+ 
