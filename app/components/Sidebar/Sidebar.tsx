@@ -1,7 +1,7 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { headers } from "next/headers";
 import Navigation from "../Navigation/Navigation";
+import { authOptions } from "@/libs/services/authoptions";
 
 const getWallets = async () => {
   try { 
