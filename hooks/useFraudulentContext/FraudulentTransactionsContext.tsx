@@ -3,7 +3,7 @@
 import React, { ReactNode, SetStateAction, createContext, useContext, useState } from 'react';
 
 type FraudulentTransactionsProvider = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 type FraudulentTransactionContext = {
@@ -14,7 +14,7 @@ type FraudulentTransactionContext = {
 export const FraudulentTransactionsContext = createContext<FraudulentTransactionContext | null>(null);
 
 export const FraudulentTransactionsProvider = ({ children }: FraudulentTransactionsProvider) => {
-  const [fraudulentTransactions, setFraudulentTransactions] = useState([]);
+  const [fraudulentTransactions, setFraudulentTransactions] = useState<string[]>([]);
 
   return (
     <FraudulentTransactionsContext.Provider value={{ fraudulentTransactions, setFraudulentTransactions }}>
