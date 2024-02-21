@@ -1,8 +1,9 @@
 import Wallet from "@/libs/models/WalletSchema";
 import connectMongoDB from "@/libs/mongo/script";
+import { authOptions } from "@/libs/services/authoptions";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/route";
+
 
 
 
