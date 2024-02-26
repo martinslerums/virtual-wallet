@@ -8,7 +8,7 @@ const WalletDetailsLayout = ({
   statistics: React.ReactNode;
 }) => {
   return (
-    <section className="max-w-full px-5 flex flex-col gap-2.5">
+    <section className="max-w-full p-5 flex flex-col gap-2.5 bg-white bg-opacity-40 rounded-[5px] ">
       <div className="w-full flex flex-col lg:flex-row gap-2.5 max-h-[300px]">
         <div className="flex flex-col gap-5 w-full">{children}</div>
         <div className="flex lg:flex-row justify-between gap-2.5 w-full">{statistics}</div>

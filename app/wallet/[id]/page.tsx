@@ -1,4 +1,4 @@
-import WalletActions from "@/app/components/WalletActions/WalletActions";
+import WalletActions from "@/components/WalletActions";
 
 const getWallet = async (id: string) => {
   const response = await fetch(`http://localhost:3000/api/wallets/${id}`, {
@@ -21,14 +21,14 @@ const WalletDetailsPage = async ({ params: { id } }: Params) => {
 
   return (
     <>
-      <div className="flex py-2 justify-between">
-        <h1 className="text-6xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">
+      <div className="flex py-2 justify-between items-center">
+        <h1 className="text-6xl sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl font-bold underline">
           {name}
         </h1>
         <WalletActions wallet={wallet} />
       </div>
-      <div className="flex flex-col py-5 w-full gap-2.5 rounded-md shadow-md">
-        <p className="flex justify-start text-xl sm:text-sm md:text-base lg:text-lg xl:text-xl p-2.5">
+      <div className="flex flex-col pb-5 pt-2 px-2.5 w-full gap-2.5 rounded-md">
+        <p className="flex justify-start text-xl sm:text-sm md:text-base lg:text-lg xl:text-xl">
           Wallet balance
         </p>
         <div className="flex justify-center align-center">

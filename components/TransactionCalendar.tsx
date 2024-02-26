@@ -26,7 +26,7 @@ const TransactionCalendar = ({transactions}: TransactionCalendarProps) => {
       <Calendar
         fixedWeeks
         mode="range"
-        className="flex rounded-md border text-xs"
+        className="flex rounded-md border text-xs bg-white"
         modifiers={dateModifiers}
         modifiersStyles={modifiersStyles}
       />

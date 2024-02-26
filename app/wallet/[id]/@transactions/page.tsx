@@ -1,6 +1,6 @@
-import { columns } from "@/app/components/TransactionList/columns";
-import NewTransactionForm from "@/app/components/NewTransactionForm/NewTransactionForm";
-import TransactionList from "@/app/components/TransactionList/data-table";
+import { columns } from "@/components/columns";
+import NewTransactionForm from "@/components/NewTransactionForm";
+import TransactionList from "@/components/data-table";
 
 const getTransactions = async (id: string) => {
 
@@ -22,7 +22,7 @@ const WalletTransactions = async ({ params: { id } }: Params) =>  {
 
   return (
     <>
-      <div className="flex grow h-full max-w-[80%] w-full">
+      <div className="flex grow h-full max-h-[297px] max-w-[80%] w-full">
         <TransactionList columns={columns} data={data} />
       </div>
       <div className="h-full max-w-[20%] w-full">

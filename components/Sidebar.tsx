@@ -1,14 +1,13 @@
 import { getServerSession } from "next-auth";
 import { headers } from "next/headers";
-import Navigation from "../Navigation/Navigation";
+import Navigation from "./Navigation";
 import { authOptions } from "@/libs/services/authoptions";
 
 const getWallets = async () => {
-  try { 
-
+  try {
     const response = await fetch("http://localhost:3000/api/wallets", {
       cache: "no-store",
-      headers: headers()
+      headers: headers(),
     });
 
     if (!response.ok) {
@@ -16,23 +15,20 @@ const getWallets = async () => {
     }
 
     return response.json();
-  } catch (error) { 
-
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
- 
-}
+};
 
 const Sidebar = async () => {
-
-  const wallets = await getWallets()
+  const wallets = await getWallets();
   const session = await getServerSession(authOptions);
 
-  return ( 
+  return (
     <div className="absolute">
       <Navigation wallets={wallets} session={session} />
     </div>
-   );
-}
- 
+  );
+};
+
 export default Sidebar;

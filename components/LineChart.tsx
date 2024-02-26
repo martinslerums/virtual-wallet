@@ -96,7 +96,7 @@ const LineChart = ({ transactions }: LineChartProps) => {
       <Line
         data={data}
         options={options}
-        className="rounded-md border h-full"
+        className="rounded-md border h-full bg-white"
       />
   );
 };

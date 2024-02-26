@@ -80,7 +80,8 @@ const config = {
       },
       backgroundImage: {
         'hero-pattern': "url('/images/background.jpg')",
-        'logged': "url('/images/backgroundlogged.png')",
+        'welcome': "url('/images/backgroundlogged.png')",
+        'logged': "url('/images/loggedin.jpg')",
       }
     },
   },

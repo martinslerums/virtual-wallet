@@ -63,9 +63,9 @@ const TransactionList = <TData, TValue>({ columns, data }: DataTableProps<TData,
   });
 
   return (
-    <div className="flex flex-col justify-between w-full">
+    <div className="flex flex-col justify-between w-full ">
       <div className="rounded-md border">
-        <Table className="max-h-[300px] h-full">
+        <Table className="max-h-[300px] h-full bg-white rounded-[5px] ">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="h-1">

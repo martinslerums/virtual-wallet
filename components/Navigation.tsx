@@ -11,7 +11,7 @@ import { LuWallet, LuLogOut } from "react-icons/lu";
 import { BsArrowLeftShort, BsChevronDown } from "react-icons/bs";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import CreateWalletModal from "../CreateWalletModal/CreateWalletModal";
+import CreateWalletModal from "./CreateWalletModal";
 
 type SidebarProps = {
   wallets: Wallet[];
@@ -40,11 +40,15 @@ const Navigation = ({ wallets, session }: SidebarProps) => {
             showNav && "rotate-[360deg]"
           }`}
         />
-        {session && 
-          <span className={`${!showNav && "scale-0"} origin-right duration-500 text-xl font-bold`}>
+        {session && (
+          <span
+            className={`${
+              !showNav && "scale-0"
+            } origin-right duration-500 text-xl font-bold`}
+          >
             {session.user?.username}
           </span>
-        }
+        )}
       </div>
       {session && (
         <div className=" flex flex-col h-[90%] justify-between">
@@ -109,8 +113,13 @@ const Navigation = ({ wallets, session }: SidebarProps) => {
             <CreateWalletModal showNav={showNav} />
           </ul>
           <div className="sidebar-li duration-300 items-center">
-            <LuLogOut className="text-5xl text-white cursor-pointer" onClick={() => signOut()}/>
-            <span className={`${!showNav && "scale-0"} origin-right duration-500`}>
+            <LuLogOut
+              className="text-5xl text-white cursor-pointer"
+              onClick={() => signOut()}
+            />
+            <span
+              className={`${!showNav && "scale-0"} origin-right duration-500`}
+            >
               Leave
             </span>
           </div>

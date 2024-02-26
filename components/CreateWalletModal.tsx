@@ -167,7 +167,7 @@ const CreateWalletModal = ({ showNav }: CreateWalletModalProps) => {
                   variant="secondary"
                   className="w-full h-full border-none outline-none rounded-md p-2 text-sm text-darkgray font-bold"
                 >
-                  Edit
+                  Create
                 </Button>
               ) : (
                 <DialogClose asChild>

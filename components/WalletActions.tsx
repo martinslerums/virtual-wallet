@@ -7,8 +7,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import EditWalletModal from "../EditWalletModal/EditWalletModal";
-import DeleteWalletModal from "../DeleteWalletModal/DeleteWalletModal";
+import EditWalletModal from "./EditWalletModal";
+import DeleteWalletModal from "./DeleteWalletModal";
 
 import { IoSettingsOutline } from "react-icons/io5";
 
@@ -20,8 +20,8 @@ const WalletActions = ({ wallet }: WalletActionsProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost">
-          <IoSettingsOutline className="text-2xl" />
+        <Button variant="link">
+          <IoSettingsOutline className="text-4xl font-bold" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

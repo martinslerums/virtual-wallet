@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Inter } from "next/font/google";
-import Provider from "./components/Provider/Provider";
-import Navigation from "./components/Sidebar/Sidebar";
+import Provider from "../components/Provider";
+import Navigation from "../components/Sidebar";
 import { getServerSession } from "next-auth";
 import { FraudulentTransactionsProvider } from "@/hooks/useFraudulentContext/FraudulentTransactionsContext";
 
@@ -36,11 +36,9 @@ const RootLayout = async ({ children }: RootLayoutProps) => {
           </Provider>
         </body>
       ) : (
-        <body className={`${inter.className} flex bg-logged custombackground`}>
+        <body className={`${inter.className} flex bg-welcome custombackground`}>
           <Provider>
-            <main className="w-screen h-screen">
-              {children}
-            </main>
+            <main className="w-screen h-screen">{children}</main>
           </Provider>
         </body>
       )}

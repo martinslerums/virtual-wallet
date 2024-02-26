@@ -1,5 +1,5 @@
-import LineChart from "@/app/components/LineChart/LineChart";
-import TransactionCalendar from "@/app/components/TransactionCalendar/TransactionCalendar";
+import LineChart from "@/components/LineChart";
+import TransactionCalendar from "@/components/TransactionCalendar";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const getTransactions = async (id: string) => {
